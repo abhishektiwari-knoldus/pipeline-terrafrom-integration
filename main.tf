@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_storage_account" "storageacc" {
-  name                     = "abhishek98765sa"
+  name                     = "abhishek98765s"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.actTier
