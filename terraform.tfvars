@@ -6,4 +6,4 @@ actTier = "Standard"
 
 conAccessType = "container"
 
-sourceFile = "/home/knoldus/file.txt"
+sourceFile = "file.txt"

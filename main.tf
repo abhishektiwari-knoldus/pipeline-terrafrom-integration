@@ -1,12 +1,13 @@
 
-data "azurerm_resource_group" "rg" {
+resource "azurerm_resource_group" "rg" {
   name     = "Abhishek-rg1"
+  location = "eastus"
 }
 
 resource "azurerm_storage_account" "storageacc" {
-  name                     = "abhishek9876521"
-  resource_group_name      = data.azurerm_resource_group.rg.name
-  location                 = data.azurerm_resource_group.rg.location
+  name                     = "abhishek98765sa"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
   account_tier             = var.actTier
   account_replication_type = var.repplication
   access_tier              = var.accessTier
