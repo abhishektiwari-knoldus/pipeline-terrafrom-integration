@@ -21,3 +21,7 @@ variable "conAccessType" {
 variable "sourceFile" {
   description = "Files coming from local"
 }
+
+variable "conAccessTypepipeline" {
+  default = "container"
+}
