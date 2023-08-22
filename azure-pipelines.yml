@@ -9,7 +9,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      myagent2
+      myagent
     steps:
     - task: CopyFiles@2
       displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
@@ -27,7 +27,7 @@ stages:
   - job: Release
     displayName: Release
     pool:
-      myagent2
+      myagent
 
     steps:
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@1
