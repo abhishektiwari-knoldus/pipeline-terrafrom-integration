@@ -11,5 +11,6 @@ terraform {
       container_name       = "tfstate"
       key                  = "terraform.tfstate"
   }
+  features {}
 
 }
