@@ -1,22 +1,12 @@
-resource "random_string" "rg_suffix" {
-  length  = 6
-  special = false
-}
-resource "random_string" "storage_account_suffix" {
-  length  = 7
-  special = false
-  upper = false
-}
-
 
 
 resource "azurerm_resource_group" "rg" {
-  name     = "Abhishek-${random_string.rg_suffix.result}"
+  name     = "Abhishek-Rg1"
   location = "eastus"
 }
 
 resource "azurerm_storage_account" "storageacc" {
-  name                     = "akashsa${random_string.storage_account_suffix.result}"
+  name                     = "akashsa23743uef"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.actTier
