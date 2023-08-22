@@ -9,7 +9,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      myagent
+      myagent2
     steps:
     - task: CopyFiles@2
       displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
@@ -27,7 +27,7 @@ stages:
   - job: Release
     displayName: Release
     pool:
-      myagent
+      myagent2
 
     steps:
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@1
@@ -61,12 +61,12 @@ stages:
         commandOptions: '-auto-approve'
         environmentServiceNameAzureRM: terraform
     
-    # # steps:
-    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
-    #   displayName: 'Terraform : destroy'
-    #   inputs:
-    #     command: destroy
-    #     workingDirectory: '$(System.DefaultWorkingDirectory)/_Main-CICD-CI/drop'
-    #     commandOptions: '-auto-approve'
-    #     environmentServiceNameAzureRM: terraform    
+    # steps:
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
+      displayName: 'Terraform : destroy'
+      inputs:
+        command: destroy
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        commandOptions: '-auto-approve'
+        environmentServiceNameAzureRM: terraform    
               
