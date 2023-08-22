@@ -1,0 +1,72 @@
+#ci
+trigger:
+- master
+
+stages:
+- stage: Build 
+  displayName: Build image.
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      myagent
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact'
+
+ #cd  
+    
+- stage: Release
+  displayName: Terraform script run
+  jobs:
+  - job: Release
+    displayName: Release
+    pool:
+      myagent
+
+    steps:
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@1
+      displayName: 'Install Terraform latest'
+
+    # steps:
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
+      displayName: 'Terraform : azurerm init'
+      inputs:
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        backendServiceArm: terraform
+        backendAzureRmResourceGroupName: backend
+        backendAzureRmStorageAccountName: backendwkej09
+        backendAzureRmContainerName: tfstate
+        backendAzureRmKey: terraform.tfstate
+        
+    # steps:
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
+      displayName: 'Terraform : azurerm -plan'
+      inputs:
+        command: plan
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        environmentServiceNameAzureRM: terraform
+    
+    # steps:
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
+      displayName: 'Terraform : apply'
+      inputs:
+        command: apply
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        commandOptions: '-auto-approve'
+        environmentServiceNameAzureRM: terraform
+    
+    # # steps:
+    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
+    #   displayName: 'Terraform : destroy'
+    #   inputs:
+    #     command: destroy
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/_Main-CICD-CI/drop'
+    #     commandOptions: '-auto-approve'
+    #     environmentServiceNameAzureRM: terraform    
+              
