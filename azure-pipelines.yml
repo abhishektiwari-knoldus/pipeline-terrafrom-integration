@@ -62,11 +62,11 @@ stages:
         environmentServiceNameAzureRM: terraform
     
     # steps:
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
-      displayName: 'Terraform : destroy'
-      inputs:
-        command: destroy
-        workingDirectory: '$(System.DefaultWorkingDirectory)'
-        commandOptions: '-auto-approve'
-        environmentServiceNameAzureRM: terraform    
+    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
+    #   displayName: 'Terraform : destroy'
+    #   inputs:
+    #     command: destroy
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)'
+    #     commandOptions: '-auto-approve'
+    #     environmentServiceNameAzureRM: terraform    
               
