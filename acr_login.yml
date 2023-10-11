@@ -1,0 +1,21 @@
+parameters:
+ - name: serviceConnection
+   type: string
+ - name: addPipelineData
+   type: string
+   default: true
+ - name: addBaseImageData
+   type: string
+   default: true
+ - name: stepname
+   type: string
+
+ steps:
+ - task: Docker@2
+   name: ${{parameters.stepname}}_login
+   displayName: login acr
+   inputs:
+     command: login
+     containerRegistry: ${{parameters.serviceConnection}}
+     addPipelineData: ${{parameters.addPipelineData}}
+     addBaseImageData: ${{parameters.addBaseImageData}}
