@@ -1,4 +1,4 @@
-# webapp-template.yml
+# webapp-template.yml.
 
 parameters:
 - name: environment
