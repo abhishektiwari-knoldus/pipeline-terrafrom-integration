@@ -9,7 +9,6 @@ parameters:
    default: true
  - name: stepname
    type: string
-
  steps:
  - task: Docker@2
    name: ${{parameters.stepname}}_login
